@@ -15,6 +15,7 @@ public class Node {
 	public Node(){
 		number = 65536;
 		weight = 0;
+		data = 0;
 		code = "";
 		left = null;
 		right = null;
@@ -24,13 +25,14 @@ public class Node {
 	public Node(int w, Node p){
 		number = 0;
 		weight = w;
+		data = 0;
 		code = "";
 		left = null;
 		right = null;
 		parent = p;
 	}
 	
-	public Node FindData(char d){
+	public Node findData(char d){
 		Queue<Node> q = new LinkedList<Node>();
 		Node n = null;
 		Node NYT = null;
@@ -46,7 +48,7 @@ public class Node {
 		return NYT;
 	}
 	
-	public Node AddData(char d){
+	public Node addData(char d){
 		if(this.weight == 0)
 		{
 			this.right = new Node(1,this);
@@ -57,7 +59,7 @@ public class Node {
 		return this;
 	}
 	
-	public void Renumber(){
+	public void renumber(){
 		int counter = 65536;
 		Queue<Node> q = new LinkedList<Node>();
 		Node n = null;
@@ -70,13 +72,13 @@ public class Node {
 		}
 	}
 	
-	public void Recode(String c){
+	public void recode(String c){
 		this.code = c;
-		if(right != null) right.Recode(c+'1');
-		if(left != null) left.Recode(c+'0');
+		if(right != null) right.recode(c+'1');
+		if(left != null) left.recode(c+'0');
 	}
 	
-	public Node FindCandidate(Node node){
+	public Node findCandidate(Node node){
 		Queue<Node> q = new LinkedList<Node>();
 		Node n = null;
 		q.add(this);
@@ -92,7 +94,7 @@ public class Node {
 		return null;
 	}
 	
-	public void TreeTrace(){
+	public void treeTrace(){
 		Queue<Node> q = new LinkedList<Node>();
 		Node n = null;
 		q.add(this);
