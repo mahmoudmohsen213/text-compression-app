@@ -12,6 +12,10 @@ public class DecodingManager extends Manager {
 
 	@Override
 	public void run() {
-		this.encoder.decode(inputStream, outputStream);
+		try {
+			this.encoder.decode(inputStream, outputStream, inputSize);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

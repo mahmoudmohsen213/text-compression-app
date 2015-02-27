@@ -7,7 +7,8 @@ public class StdHuffmanEncoder extends Encoder {
 
 	static{
 		try {
-			EncoderFactory.register("StdHuffmanEncoder", StdHuffmanEncoder.class.getConstructor());
+			EncoderFactory.register("StdHuffmanEncoder",
+					StdHuffmanEncoder.class.getConstructor());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -15,7 +16,7 @@ public class StdHuffmanEncoder extends Encoder {
 	
 	@Override
 	public void encode(BufferedInputStream inputStream,
-			BufferedOutputStream outputStream) {
+			BufferedOutputStream outputStream, int inputSize) throws Exception  {
 		System.out.println("StdHuffmanEncoder.encode()");
 		setChanged();
 		notifyObservers(50);
@@ -28,7 +29,7 @@ public class StdHuffmanEncoder extends Encoder {
 
 	@Override
 	public void decode(BufferedInputStream inputStream,
-			BufferedOutputStream outputStream) {
+			BufferedOutputStream outputStream, int inputSize) throws Exception {
 		System.out.println("StdHuffmanEncoder.decode()");
 		setChanged();
 		notifyObservers(50);

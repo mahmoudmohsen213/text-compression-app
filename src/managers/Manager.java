@@ -2,6 +2,7 @@ package managers;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
@@ -21,6 +22,7 @@ public abstract class Manager implements Runnable {
 	protected MainFrame mainFrame;
 	protected Thread thread;
 	protected boolean isGood;
+	protected int inputSize;
 	
 	public Manager(String inputFileName, String outputFileName,
 			String encoderID, MainFrame mainFrame){
@@ -33,6 +35,9 @@ public abstract class Manager implements Runnable {
 	
 	protected boolean initialize(){
 		try{
+			File tempFile = new File(inputFileName);
+			inputSize = (int) tempFile.length();
+			
 			inputStream = new BufferedInputStream(
 					new FileInputStream(inputFileName));
 		} catch(Exception e){

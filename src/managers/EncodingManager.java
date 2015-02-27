@@ -12,6 +12,10 @@ public class EncodingManager extends Manager {
 
 	@Override
 	public void run() {
-		this.encoder.encode(inputStream, outputStream);
+		try {
+			this.encoder.encode(inputStream, outputStream, inputSize);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
