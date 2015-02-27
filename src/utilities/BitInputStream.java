@@ -8,11 +8,15 @@ public class BitInputStream extends InputStream {
 	private BufferedInputStream inputStream;
 	private byte currentByte;
 	private byte currentIndex;
+	private byte markedByte;
+	private byte markedIndex;
 	
 	public BitInputStream(BufferedInputStream inputStream){
 		this.inputStream = inputStream;
 		currentByte = 0;
 		currentIndex = 8;
+		markedByte = -1;
+		markedIndex = -1;
 	}
 
 	@Override
@@ -28,6 +32,25 @@ public class BitInputStream extends InputStream {
 		}
 		
 		return ((currentByte>>(currentIndex++))&1);
+	}
+	
+	@Override
+	public void mark(int readlimit){
+		markedByte = currentByte;
+		markedIndex = currentIndex;
+		inputStream.mark(readlimit);
+	}
+	
+	@Override
+	public boolean markSupported(){
+		return true;
+	}
+	
+	@Override
+	public void reset() throws IOException{
+		inputStream.reset();
+		currentByte = markedByte;
+		currentIndex = markedIndex;
 	}
 	
 	public byte readByte() throws IOException{
