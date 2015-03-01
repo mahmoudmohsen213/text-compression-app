@@ -3,16 +3,16 @@ package utilities;
 import java.util.Queue;
 import java.util.LinkedList;
 
-public class Node {
+public class AdHuffmanNode {
 	public int number;
 	public int weight;
 	public char data;	
 	public String code;	
-	public Node left;
-	public Node right;
-	public Node parent;
+	public AdHuffmanNode left;
+	public AdHuffmanNode right;
+	public AdHuffmanNode parent;
 	
-	public Node(){
+	public AdHuffmanNode(){
 		number = 65536;
 		weight = 0;
 		data = 0;
@@ -22,7 +22,7 @@ public class Node {
 		parent = null;
 	}
 	
-	public Node(int w, Node p){
+	public AdHuffmanNode(int w, AdHuffmanNode p){
 		number = 0;
 		weight = w;
 		data = 0;
@@ -32,10 +32,10 @@ public class Node {
 		parent = p;
 	}
 	
-	public Node findData(char d){
-		Queue<Node> q = new LinkedList<Node>();
-		Node n = null;
-		Node NYT = null;
+	public AdHuffmanNode findData(char d){
+		Queue<AdHuffmanNode> q = new LinkedList<AdHuffmanNode>();
+		AdHuffmanNode n = null;
+		AdHuffmanNode NYT = null;
 		q.add(this);
 		while(!q.isEmpty()){
 			n=q.poll();
@@ -48,21 +48,21 @@ public class Node {
 		return NYT;
 	}
 	
-	public Node addData(char d){
+	public AdHuffmanNode addData(char d){
 		if(this.weight == 0)
 		{
-			this.right = new Node(1,this);
+			this.right = new AdHuffmanNode(1,this);
 			this.right.data = d;
 			this.right.code = this.code + '1';
-			this.left = new Node(0,this);
+			this.left = new AdHuffmanNode(0,this);
 		}
 		return this;
 	}
 	
 	public void renumber(){
 		int counter = 65536;
-		Queue<Node> q = new LinkedList<Node>();
-		Node n = null;
+		Queue<AdHuffmanNode> q = new LinkedList<AdHuffmanNode>();
+		AdHuffmanNode n = null;
 		q.add(this);
 		while(!q.isEmpty()){
 			n=q.poll();
@@ -78,9 +78,9 @@ public class Node {
 		if(left != null) left.recode(c+'0');
 	}
 	
-	public Node findCandidate(Node node){
-		Queue<Node> q = new LinkedList<Node>();
-		Node n = null;
+	public AdHuffmanNode findCandidate(AdHuffmanNode node){
+		Queue<AdHuffmanNode> q = new LinkedList<AdHuffmanNode>();
+		AdHuffmanNode n = null;
 		q.add(this);
 		while(!q.isEmpty()){
 			n=q.poll();
@@ -95,8 +95,8 @@ public class Node {
 	}
 	
 	public void treeTrace(){
-		Queue<Node> q = new LinkedList<Node>();
-		Node n = null;
+		Queue<AdHuffmanNode> q = new LinkedList<AdHuffmanNode>();
+		AdHuffmanNode n = null;
 		q.add(this);
 		while(!q.isEmpty()){
 			n=q.poll();
