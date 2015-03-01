@@ -27,21 +27,33 @@ public class AdHuffmanEncoder extends Encoder {
 		notifyObservers(0);
 		
 		char currentChar;
+		int tempReadValue;
 		Node root = new Node();
 		InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
 		BitOutputStream bitOutputStream = new BitOutputStream(outputStream);
 		
 		long counter = 0;
 		
-		currentChar = (char) inputStreamReader.read();
+		tempReadValue = inputStreamReader.read();
+		if(tempReadValue == -1){
+			inputStreamReader.close();
+			bitOutputStream.close();
+			setChanged();
+			notifyObservers(100);
+		}
+		
+		currentChar = (char) tempReadValue;
 		bitOutputStream.writeChar(currentChar);
 		root.addData(currentChar);
 		++root.weight;
 		root.renumber();
 		root.recode("");
 		
-		while(inputStreamReader.ready()){
-			currentChar = (char) inputStreamReader.read();
+		tempReadValue = inputStreamReader.read();
+		while(tempReadValue != -1){
+			currentChar = (char) tempReadValue;
+			tempReadValue = inputStreamReader.read();
+			
 			Node node = root.findData(currentChar);
 			if(node.weight == 0) { // new character
 				bitOutputStream.writeBitString(node.code); // add NYT code
