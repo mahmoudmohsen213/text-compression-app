@@ -6,7 +6,7 @@ import java.util.Observable;
 
 public abstract class Encoder extends Observable{
 	public abstract void encode(BufferedInputStream inputStream,
-			BufferedOutputStream outputStream, int inputSize) throws Exception;
+			BufferedOutputStream outputStream, long inputSize) throws Exception;
 	public abstract void decode(BufferedInputStream inputStream,
-			BufferedOutputStream outputStream, int inputSize) throws Exception;
+			BufferedOutputStream outputStream, long inputSize) throws Exception;
 }

@@ -16,7 +16,7 @@ public class StdHuffmanEncoder extends Encoder {
 	
 	@Override
 	public void encode(BufferedInputStream inputStream,
-			BufferedOutputStream outputStream, int inputSize) throws Exception  {
+			BufferedOutputStream outputStream, long inputSize) throws Exception  {
 		System.out.println("StdHuffmanEncoder.encode()");
 		setChanged();
 		notifyObservers(50);
@@ -29,7 +29,7 @@ public class StdHuffmanEncoder extends Encoder {
 
 	@Override
 	public void decode(BufferedInputStream inputStream,
-			BufferedOutputStream outputStream, int inputSize) throws Exception {
+			BufferedOutputStream outputStream, long inputSize) throws Exception {
 		System.out.println("StdHuffmanEncoder.decode()");
 		setChanged();
 		notifyObservers(50);

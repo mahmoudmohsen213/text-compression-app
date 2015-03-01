@@ -22,7 +22,7 @@ public abstract class Manager implements Runnable {
 	protected MainFrame mainFrame;
 	protected Thread thread;
 	protected boolean isGood;
-	protected int inputSize;
+	protected long inputSize;
 	
 	public Manager(String inputFileName, String outputFileName,
 			String encoderID, MainFrame mainFrame){
@@ -36,7 +36,7 @@ public abstract class Manager implements Runnable {
 	protected boolean initialize(){
 		try{
 			File tempFile = new File(inputFileName);
-			inputSize = (int) tempFile.length();
+			inputSize = tempFile.length();
 			
 			inputStream = new BufferedInputStream(
 					new FileInputStream(inputFileName));
