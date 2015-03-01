@@ -1,6 +1,6 @@
 package managers;
 
-import main.MainFrame;
+import ui.MainFrame;
 
 public class EncodingManager extends Manager {
 	

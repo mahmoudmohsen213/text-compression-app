@@ -1,5 +1,6 @@
-package main;
 
+
+import ui.MainFrame;
 import encoders.AdHuffmanEncoder;
 import encoders.ArithmaticEncoder;
 import encoders.StdHuffmanEncoder;

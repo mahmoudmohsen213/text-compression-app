@@ -8,9 +8,9 @@ import java.io.FileOutputStream;
 
 import javax.swing.JOptionPane;
 
+import ui.MainFrame;
 import encoders.Encoder;
 import encoders.EncoderFactory;
-import main.MainFrame;
 
 public abstract class Manager implements Runnable {
 	protected String inputFileName;

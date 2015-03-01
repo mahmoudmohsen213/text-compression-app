@@ -3,7 +3,7 @@ package actionListeners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import main.MainFrame;
+import ui.MainFrame;
 import managers.EncodingManager;
 
 public class Encode_btn_ActionListener implements ActionListener {
