@@ -7,7 +7,7 @@ import java.io.OutputStreamWriter;
 
 import utilities.BitInputStream;
 import utilities.BitOutputStream;
-import utilities.Node;
+import utilities.AdHuffmanNode;
 
 public class AdHuffmanEncoder extends Encoder {
 	
@@ -28,11 +28,11 @@ public class AdHuffmanEncoder extends Encoder {
 		
 		char currentChar;
 		int tempReadValue;
-		Node root = new Node();
+		AdHuffmanNode root = new AdHuffmanNode();
 		InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
 		BitOutputStream bitOutputStream = new BitOutputStream(outputStream);
 		
-		long counter = 0;
+		long dataCounter = 0;
 		
 		tempReadValue = inputStreamReader.read();
 		if(tempReadValue == -1){
@@ -54,7 +54,7 @@ public class AdHuffmanEncoder extends Encoder {
 			currentChar = (char) tempReadValue;
 			tempReadValue = inputStreamReader.read();
 			
-			Node node = root.findData(currentChar);
+			AdHuffmanNode node = root.findData(currentChar);
 			if(node.weight == 0) { // new character
 				bitOutputStream.writeBitString(node.code); // add NYT code
 				bitOutputStream.writeChar(currentChar); // add ASCII code
@@ -66,7 +66,7 @@ public class AdHuffmanEncoder extends Encoder {
 			
 			// update the tree
 			while(node != root){
-				Node tempNode = root.findCandidate(node); // find a swap candidate
+				AdHuffmanNode tempNode = root.findCandidate(node); // find a swap candidate
 				if(tempNode != null) { // swap candidate found
 					swapNode(node, tempNode);
 					root.renumber();
@@ -77,13 +77,13 @@ public class AdHuffmanEncoder extends Encoder {
 			}
 			root.weight++;
 			
-			if(((counter+=2)%1024) == 0){
+			if(((dataCounter+=2)%1024) == 0){
 				setChanged();
-				notifyObservers((int)((counter*100)/inputSize));
+				notifyObservers((int)((dataCounter*100)/inputSize));
 			}
 		}
 		
-		Node node = root.findData(Character.MAX_VALUE); // node points to NYT-node
+		AdHuffmanNode node = root.findData(Character.MAX_VALUE); // node points to NYT-node
 		bitOutputStream.writeBitString(node.code); // add NYT code
 		bitOutputStream.writeChar(Character.MAX_VALUE); // add EOF bit mark
 		
@@ -100,11 +100,11 @@ public class AdHuffmanEncoder extends Encoder {
 		notifyObservers(0);
 		
 		int currentBit = 0;
-		Node root = new Node(), node = root;
+		AdHuffmanNode root = new AdHuffmanNode(), node = root;
 		BitInputStream bitInputStream = new BitInputStream(inputStream);
 		OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream);
 		
-		long counter = 0;
+		long dataCounter = 0;
 		
 		do{
 			if((node.left == null)&&(node.right == null)){ // leaf
@@ -119,7 +119,7 @@ public class AdHuffmanEncoder extends Encoder {
 				else outputStreamWriter.write(node.data); // old character
 				
 				while(node != root){
-					Node tempNode = root.findCandidate(node); // find a swap candidate
+					AdHuffmanNode tempNode = root.findCandidate(node); // find a swap candidate
 					if(tempNode != null) { // swap candidate found
 						swapNode(node, tempNode);
 						root.renumber();
@@ -130,18 +130,18 @@ public class AdHuffmanEncoder extends Encoder {
 				}
 				root.weight++;
 				node = root;
-				counter+=16;
+				dataCounter+=16;
 			}
 			else {
 				currentBit = bitInputStream.read();
 				if(currentBit == 1) node = node.right;
 				else if(currentBit == 0) node = node.left;
-				++counter;
+				++dataCounter;
 			}
 			
-			if(((counter>>3)%1024) == 0){
+			if(((dataCounter>>3)%1024) == 0){
 				setChanged();
-				notifyObservers((int)(((counter>>3)*100)/inputSize));
+				notifyObservers((int)(((dataCounter>>3)*100)/inputSize));
 			}
 			
 		}while(currentBit != -1);
@@ -152,14 +152,14 @@ public class AdHuffmanEncoder extends Encoder {
 		notifyObservers(100);
 	}
 	
-	private void swapNode(Node n1, Node n2){
+	private void swapNode(AdHuffmanNode n1, AdHuffmanNode n2){
 		if(n1.parent.left == n1) n1.parent.left = n2;
 		else n1.parent.right = n2;
 		
 		if(n2.parent.left == n2) n2.parent.left = n1;
 		else n2.parent.right = n1;
 		
-		Node temp = n1.parent;
+		AdHuffmanNode temp = n1.parent;
 		n1.parent = n2.parent;
 		n2.parent = temp;
 		temp = null;
