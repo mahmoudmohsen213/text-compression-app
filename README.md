@@ -1,2 +1,2 @@
 # text-compression-app
-Basic implementation of Arithmatic encoding, Standard huffman, and Adaptive huffman text compression algorithms.
+A text compression application using standard huffman, adaptive huffman and arithmatic encoding lossless compression algorithms.
