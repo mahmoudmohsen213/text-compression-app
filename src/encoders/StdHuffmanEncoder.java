@@ -26,7 +26,7 @@ public class StdHuffmanEncoder extends Encoder {
 	
 	@Override
 	public void encode(BufferedInputStream inputStream,
-			BufferedOutputStream outputStream, long inputSize) throws Exception  {
+			BufferedOutputStream outputStream, Object...args) throws Exception  {
 		setChanged();
 		notifyObservers(0);
 		
@@ -37,6 +37,7 @@ public class StdHuffmanEncoder extends Encoder {
 		HashMap<Character,Long> frequencyTable = new HashMap<Character,Long>();
 		
 		long dataCounter = 0;
+		long inputSize = (Integer)args[0];
 		
 		if(!inputStream.markSupported()){
 			inputStreamReader.close();
@@ -96,7 +97,7 @@ public class StdHuffmanEncoder extends Encoder {
 
 	@Override
 	public void decode(BufferedInputStream inputStream,
-			BufferedOutputStream outputStream, long inputSize) throws Exception {
+			BufferedOutputStream outputStream, Object...args) throws Exception {
 		setChanged();
 		notifyObservers(0);
 		
@@ -107,6 +108,7 @@ public class StdHuffmanEncoder extends Encoder {
 		OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream);
 		
 		long dataCounter = 16;
+		long inputSize = (Integer)args[0];
 		
 		currentChar = bitInputStream.readChar();
 		while(currentChar != ((char)(Character.MAX_VALUE - 1))){ // reading the code book

@@ -16,7 +16,7 @@ public class ArithmaticEncoder extends Encoder {
 	
 	@Override
 	public void encode(BufferedInputStream inputStream,
-			BufferedOutputStream outputStream, long inputSize) throws Exception  {
+			BufferedOutputStream outputStream, Object...args) throws Exception  {
 		System.out.println("ArithmaticEncoder.encode()");
 		setChanged();
 		notifyObservers(50);
@@ -29,7 +29,7 @@ public class ArithmaticEncoder extends Encoder {
 
 	@Override
 	public void decode(BufferedInputStream inputStream,
-			BufferedOutputStream outputStream, long inputSize) throws Exception {
+			BufferedOutputStream outputStream, Object...args) throws Exception {
 		System.out.println("ArithmaticEncoder.decode()");
 		setChanged();
 		notifyObservers(50);

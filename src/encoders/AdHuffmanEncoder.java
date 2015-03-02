@@ -22,7 +22,7 @@ public class AdHuffmanEncoder extends Encoder {
 
 	@Override
 	public void encode(BufferedInputStream inputStream,
-			BufferedOutputStream outputStream, long inputSize) throws Exception  {
+			BufferedOutputStream outputStream, Object...args) throws Exception  {
 		setChanged();
 		notifyObservers(0);
 		
@@ -33,6 +33,7 @@ public class AdHuffmanEncoder extends Encoder {
 		BitOutputStream bitOutputStream = new BitOutputStream(outputStream);
 		
 		long dataCounter = 0;
+		long inputSize = (Integer)args[0];
 		
 		tempReadValue = inputStreamReader.read();
 		if(tempReadValue == -1){
@@ -95,7 +96,7 @@ public class AdHuffmanEncoder extends Encoder {
 
 	@Override
 	public void decode(BufferedInputStream inputStream,
-			BufferedOutputStream outputStream, long inputSize) throws Exception {
+			BufferedOutputStream outputStream, Object...args) throws Exception {
 		setChanged();
 		notifyObservers(0);
 		
@@ -105,6 +106,7 @@ public class AdHuffmanEncoder extends Encoder {
 		OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream);
 		
 		long dataCounter = 0;
+		long inputSize = (Integer)args[0];
 		
 		do{
 			if((node.left == null)&&(node.right == null)){ // leaf
