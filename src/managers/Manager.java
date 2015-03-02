@@ -6,8 +6,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
-import javax.swing.JOptionPane;
-
 import ui.MainFrame;
 import encoders.Encoder;
 import encoders.EncoderFactory;
@@ -31,40 +29,27 @@ public abstract class Manager implements Runnable {
 		this.encoderID = encoderID;
 		this.mainFrame = mainFrame;
 		this.thread = new Thread(this);
+		this.isGood = false;
 	}
 	
-	protected boolean initialize(){
-		try{
-			File tempFile = new File(inputFileName);
-			inputSize = tempFile.length();
-			
-			inputStream = new BufferedInputStream(
-					new FileInputStream(inputFileName));
-		} catch(Exception e){
-			JOptionPane.showMessageDialog(null, e.getMessage());
-			return false;
-		}
+	protected boolean initialize() throws Exception{
+		File tempFile = new File(inputFileName);
+		inputSize = tempFile.length();
 		
-		try{
-			outputStream = new BufferedOutputStream(
-					new FileOutputStream(outputFileName));
-		} catch(Exception e){
-			JOptionPane.showMessageDialog(null, e.getMessage());
-			return false;
-		}
+		inputStream = new BufferedInputStream(
+				new FileInputStream(inputFileName));
 		
-		try {
-			encoder = EncoderFactory.create(encoderID);
-			encoder.addObserver(mainFrame);
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e.getMessage());
-			return false;
-		}
+		outputStream = new BufferedOutputStream(
+				new FileOutputStream(outputFileName));
+
+		encoder = EncoderFactory.create(encoderID);
+		encoder.addObserver(mainFrame);
 		
 		return true;
 	}
 	
 	public final void start(){
-		if(isGood) thread.start();
+		if(isGood)
+			thread.start();
 	}
 }

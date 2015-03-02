@@ -3,6 +3,8 @@ package actionListeners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+
 import ui.MainFrame;
 import managers.DecodingManager;
 
@@ -15,8 +17,13 @@ public class Decode_btn_ActionListener implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		DecodingManager decodingManager = new DecodingManager(parentFrame.getInputFileName(),
-				parentFrame.getOutputFileName(), parentFrame.getEncodingSelection(), parentFrame);
-		decodingManager.start();
+		try{
+			DecodingManager decodingManager = new DecodingManager(
+					parentFrame.getInputFileName(), parentFrame.getOutputFileName(),
+					parentFrame.getEncodingSelection(), parentFrame);
+			decodingManager.start();
+		} catch(Exception ex){
+			JOptionPane.showMessageDialog(null, ex.getMessage());
+		}
 	}
 }

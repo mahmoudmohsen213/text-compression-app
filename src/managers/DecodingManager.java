@@ -5,7 +5,7 @@ import ui.MainFrame;
 public class DecodingManager extends Manager {
 	
 	public DecodingManager(String inputFileName, String outputFileName,
-			String encoderID, MainFrame mainFrame) {
+			String encoderID, MainFrame mainFrame) throws Exception {
 		super(inputFileName, outputFileName, encoderID, mainFrame);
 		isGood = this.initialize();
 	}
