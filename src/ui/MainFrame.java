@@ -36,7 +36,7 @@ public class MainFrame extends JFrame implements Observer  {
 	private JComboBox<String> encodingSelectionBox;
 	
 	public MainFrame() {
-		setTitle("Text Encoder");
+		setTitle("Text Compression App");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(450, 250, 470, 155);
 		
