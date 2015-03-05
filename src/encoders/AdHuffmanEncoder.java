@@ -33,7 +33,7 @@ public class AdHuffmanEncoder extends Encoder {
 		BitOutputStream bitOutputStream = new BitOutputStream(outputStream);
 		
 		long dataCounter = 0;
-		long inputSize = (Integer)args[0];
+		long inputSize = (Long)args[0];
 		
 		tempReadValue = inputStreamReader.read();
 		if(tempReadValue == -1){

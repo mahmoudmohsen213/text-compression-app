@@ -37,7 +37,7 @@ public class StdHuffmanEncoder extends Encoder {
 		HashMap<Character,Long> frequencyTable = new HashMap<Character,Long>();
 		
 		long dataCounter = 0;
-		long inputSize = (Integer)args[0];
+		long inputSize = (Long)args[0];
 		
 		if(!inputStream.markSupported()){
 			inputStreamReader.close();
